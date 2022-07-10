@@ -41,56 +41,40 @@ static int	ft_get_nbr_word_modif(const char *str, char c, int *code_caractere)
 	return (nbr);
 }
 
-void	ft_free_tab_modif(char **tab, int n)
-{
-	int	i;
-
-	i = 0;
-	while (i < n)
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-}
-
 void ft_index(int *k, int *j)
 {
 	*k = *k + 1;
 	*j = *j + 1;
 }
 
-void	ft_get_words_modif(char **tab, char *str, char c, int n)
+void	ft_get_words_modif(char **tab, char *str, char c, int *code_caractere)
 {
 	int	i;
 	int	j;
 	int	k;
+	int n;
 
+	n = ft_get_nbr_word_modif(str, c, code_caractere);
 	i = 0;
 	k = 0;
 	while (i < n)
 	{
 		j = 0;
-		while (*str == c && (ft_code_char(str)[k]) == 6)
+		while (*str == c && (code_caractere[k]) == 6)
 		{
 			str++;
 			k++;
 		}
 		while ((*(str + j) && *(str + j) != c) || (*(str + j) == c
-				&& (ft_code_char(str))[k] != 6))
+				&& (code_caractere[k] != 6)))
 			ft_index(&k, &j);
 		tab[i] = ft_substr(str, 0, j);
-		if (!tab[i])
-		{
-			ft_free_tab_modif(tab, i - 1);
-			return ;
-		}
 		str += j;
 		i++;
 	}
 }
 
-char	**ft_split_modif(char *s, char c,int *code_caractere)
+char	**ft_split_modif(char *s, char c, int *code_caractere)
 {
 	int		n;
 	char	**tab;
@@ -102,6 +86,6 @@ char	**ft_split_modif(char *s, char c,int *code_caractere)
 	if (!tab)
 		return (NULL);
 	tab[n] = NULL;
-	ft_get_words_modif(tab, s, c, n);
+	ft_get_words_modif(tab, s, c, code_caractere);
 	return (tab);
 }
