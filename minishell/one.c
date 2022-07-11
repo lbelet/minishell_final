@@ -30,6 +30,8 @@ void ft_one(char *str, char **envp)
 	char **commande;
 	int i;
 
+	//char **args_in = NULL;
+
 	i = 0;
 	fd = malloc(2 * sizeof(int));
 	fd[0] = 0;
@@ -37,9 +39,10 @@ void ft_one(char *str, char **envp)
     cmd = ft_split_modif(str, ' ', ft_code_char(str));
 	commande = ft_malloc_tab(cmd);
 	ft_check_redir(fd, cmd, commande);
-//	ft_execute_inbuilt(cmd, envp, &args_in);
-//	if (ft_check_builtins(cmd) == 0)
-//	{
+	ft_execute_builtins(commande, envp);
+	if (ft_check_builtins(cmd) == 0)
+	{
+		printf("pas builtins....\n");
 //		if (fd[0] > 0 && fd[1] > 0)
 //			ft_exec_in_out(fd, commande, envp);
 //		else if (fd[0] > 0 && fd[1] == 0)
@@ -50,6 +53,6 @@ void ft_one(char *str, char **envp)
 			ft_process_one_classic(commande, envp);
 		ft_free_tab_simple(cmd);
     //    ft_free_tab_simple(commande);
-//		free(fd);
-//	}
+		free(fd);
+	}
 }

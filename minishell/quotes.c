@@ -14,7 +14,7 @@ char	*ft_check_quote(char **tab, int n)
 	int code_quote;
 	int j;
 	int k;
-	char temp[100] = {0};
+	char temp[200] = {0};
 
 	j = 0;
 	code_quote = 0;
@@ -41,7 +41,7 @@ void	ft_check_quote_simple(char *tab)
 	int code_quote;
 	int j;
 	int k;
-	char temp[100] = {0};
+	char temp[200] = {0};
 
 	j = 0;
 	code_quote = 0;

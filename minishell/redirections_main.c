@@ -57,7 +57,7 @@ void ft_check_redir(int *fd, char **cmd, char **commande)
 	while (commande[i])
 	{
 		ft_check_quote_simple(commande[i]);
-		printf("%s\n", commande[i]);
+	//	printf("%s\n", commande[i]);
 		i++;
 	}
 }

@@ -28,10 +28,10 @@ char *ft_change_value(char *str, char **envp, int start, int len)
 		if (ft_strncmp(envp[k], tmp_bis, ft_strlen(tmp_bis) != 0))
 			k++;
 		else
-			tmp_bis = ft_tmp(envp, tmp_bis, k);
+			return(ft_tmp(envp, tmp_bis, k));
 
 	}
-	return (tmp_bis);
+	return NULL;
 }
 
 char *ft_check_dollars(char *str, char **envp, int *code_caractere)
@@ -40,6 +40,7 @@ char *ft_check_dollars(char *str, char **envp, int *code_caractere)
 	int start;
 	int len;
 	char *tmp;
+	char *change;
 
 	i = 0;
 	len = 0;
@@ -48,17 +49,26 @@ char *ft_check_dollars(char *str, char **envp, int *code_caractere)
 	{
 		if (str[i] != '$'  || (str[i] == '$' && code_caractere[i] == 8))
 			tmp = ft_strjoin_modif(tmp, str[i]);
-		else if(str[i] == '$' && code_caractere[i] != 8)
+		else if(str[i] == '$' && code_caractere[i] != 8 && str[i + 1] != '?')
 		{
 			i++;
 			start = i;
 			while (ft_isalnum(str[i]) == 1)
 				ft_increase(&i, &len);
 			i--;
-			tmp = ft_strjoin(tmp, ft_change_value(str, envp, start, len));
+			if (ft_change_value(str, envp, start, len) != NULL)
+				tmp = ft_strjoin(tmp, ft_change_value(str, envp, start, len));
+//			else
+//				tmp = ft_strjoin(tmp, ft_change_value(str, nos_variables, start, len));
+		}
+		else if(str[i] == '$' && code_caractere[i] != 8 && str[i + 1] == '?')
+		{
+
 		}
 		i++;
 	}
-//	free (str);
-	return (ft_strdup(tmp));
+	free (str);
+	change = ft_strdup(tmp);
+	free(tmp);
+	return (change);
 }

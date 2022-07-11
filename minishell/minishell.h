@@ -19,6 +19,13 @@
 #include <limits.h>
 #include <dirent.h>
 
+typedef struct s_var
+{
+    char    **nos_variables;
+}           t_var;
+
+
+
 // ------- malloc.c -------------
 char    **ft_malloc_tab(char **original);
 // ------- free.c ---------------
@@ -28,8 +35,6 @@ void    ft_cpy_tab(char **original, char **copy);
 char	*ft_strjoin_modif(char const *s1, char const s2);
 // ------- signals.c ------------
 void    define_input_signals(void);
-// ------- code_char.c ----------
-int     *ft_code_char(char *str);
 // ------- split_modif.c --------
 char	**ft_split_modif(char *s, char c,int *code_caractere);
 // ------- one.c ----------------
@@ -38,6 +43,7 @@ void    ft_one(char *str, char **envp);
 char    *ft_path(char *str);
 // ------- errors.c -------------
 int	    ft_error(char *path_cmd, char **cmd_infile);
+void    ft_error_fd(int fd, char *infile);
 // ------- redirections_main.c --
 void    ft_check_redir(int *fd, char **cmd, char **commande);
 char    *ft_set_cmd(char **cmd, int *j, int i, int *code_caractere);
@@ -48,7 +54,35 @@ void	ft_check_quote_simple(char *tab);
 char    *ft_check_dollars(char *str, char **envp, int *code_caractere);
 // ------- code_char.c ----------
 int     ft_open_quote(char  *str, int i, int *code_char);
-
-
+int     *ft_code_char(char *str);
+// ------- builtins_main.c ------
+int     ft_check_builtins(char **cmd);
+void    ft_execute_builtins(char **cmd_test, char **envp);
+int     ft_execute_builtins_fd(int fd_out, char **cmd_test);
+// ------- echo.c ---------------
+int ft_echo(char **cmd_test);
+int ft_echo_fd(int fd_out, char **cmd_test);
+// ------- redir_in_out.c -------
+void ft_exec_in_out(int *fd, char **commande, char **envp);
+void ft_files(char **cmd, int *fd, int *j, int *i);
+char *ft_set_file(char **cmd, int *j, int i);
+// ------- redir_in.c -----------
+void ft_exec_in(int fd_in, char **commande, char **envp);
+void ft_infile_split(char **cmd, int *fd, int *i);
+void ft_infile_nosplit(char **cmd, int *fd, int *j, int i);
+// ------- redir_out.c ----------
+void ft_exec_out(int fd_out, char **commande, char **envp);
+void ft_outfile_nosplit_append(char **cmd, int *fd, int i, int *j);
+void ft_outfile_nosplit(char **cmd, int *fd, int i, int *j);
+void ft_outfile_split(char **cmd, int *fd, int *i);
+void  ft_process_onlyone_output(int fd_out, char *path_cmd, char **cmd, char **envp);
+// ------- export.c -------------
+char   **ft_export(char **cmd_test, char **envp, char **nos_variables);
+// ------- OLDaaaaa.c -----------
+void    ft_printf_all(char **sorted);
+void    ft_sort_alpha(char **sorted);
+char    **ft_malloc_var(char **original);
+char    **ft_malloc_env(char **original);
+int ft_nbr_args(char **cmd_test);
 
 #endif

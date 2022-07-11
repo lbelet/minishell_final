@@ -18,7 +18,11 @@ SRC = minishell.c\
 		redir_in.c\
 		redir_out.c\
 		dollar.c\
-		errors.c
+		errors.c\
+		builtins_main.c\
+		echo.c\
+		export.c\
+		OLDexport_utilsOLD.c
 	
 YELLOW=$'\x1b[33m
 RED=$'\x1b[31m
