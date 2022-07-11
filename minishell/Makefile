@@ -13,9 +13,12 @@ SRC = minishell.c\
 		one.c\
 		get_path.c\
 		quotes.c\
-		redirections.c\
+		redirections_main.c\
+		redir_in_out.c\
+		redir_in.c\
+		redir_out.c\
 		dollar.c\
-		error.c
+		errors.c
 	
 YELLOW=$'\x1b[33m
 RED=$'\x1b[31m

@@ -9,6 +9,7 @@ void ft_increase(int *i, int *len)
 char *ft_tmp(char **envp, char *tmp_bis, int k)
 {
 	char **split;
+	(void) tmp_bis;
 
 	split = ft_split(envp[k], '=');
 	free (tmp_bis);
@@ -58,6 +59,6 @@ char *ft_check_dollars(char *str, char **envp, int *code_caractere)
 		}
 		i++;
 	}
-	free (str);
+//	free (str);
 	return (ft_strdup(tmp));
 }

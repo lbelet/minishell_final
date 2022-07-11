@@ -35,11 +35,11 @@ void ft_one(char *str, char **envp)
 	fd[0] = 0;
 	fd[1] = 0;
     cmd = ft_split_modif(str, ' ', ft_code_char(str));
+	commande = ft_malloc_tab(cmd);
+	ft_check_redir(fd, cmd, commande);
 //	ft_execute_inbuilt(cmd, envp, &args_in);
 //	if (ft_check_builtins(cmd) == 0)
 //	{
-		commande = ft_malloc_tab(cmd);
-		ft_check_redir(fd, cmd, commande);
 //		if (fd[0] > 0 && fd[1] > 0)
 //			ft_exec_in_out(fd, commande, envp);
 //		else if (fd[0] > 0 && fd[1] == 0)
